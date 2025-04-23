@@ -10,7 +10,7 @@ import { GithubIcon } from "@/components/icons";
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <h1>a ver ahora</h1>
+      <h1>a ver ahora 2</h1>
     </section>
   );
 }
