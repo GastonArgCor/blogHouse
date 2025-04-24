@@ -1,16 +1,13 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
+import CreateNewsForm from "components/blog/components/CreateNewForm";
+import NewsList from "components/blog/components/NewList";
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <h1>a ver ahora 2</h1>
-    </section>
+    <div className="p-8 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6">Noticias</h1>
+      <CreateNewsForm />
+      <hr className="my-6" />
+      <NewsList />
+    </div>
   );
 }
