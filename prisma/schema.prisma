@@ -15,8 +15,9 @@ datasource db {
 
 
 model Blog {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId // Id único y generado automáticamente
-  title       String // Título del blog
-  description String // Descripción del blog
-  createdAt   DateTime @default(now()) // Fecha de creación del blog
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
