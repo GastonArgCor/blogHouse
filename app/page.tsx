@@ -1,13 +1,21 @@
-import CreateNewsForm from "components/blog/components/CreateNewForm";
-import NewsList from "components/blog/components/NewList";
+import { prisma } from "@/lib/prisma";
+import NewsManager from "@/components/blog/components/NewsManager";
+import { News } from "@/components/blog/interfaces/News";
 
-export default function HomePage() {
+export default async function Page() {
+  const newsFromDb = await prisma.news.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
+  const news: News[] = newsFromDb.map((n) => ({
+    ...n,
+    createdAt: n.createdAt.toISOString(),
+  }));
+
   return (
-    <div className="p-8 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6">Noticias</h1>
-      <CreateNewsForm />
-      <hr className="my-6" />
-      <NewsList />
-    </div>
+    <main className="bg-black min-h-screen p-6 text-white max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Noticias</h1>
+      <NewsManager initialNews={news} />
+    </main>
   );
 }

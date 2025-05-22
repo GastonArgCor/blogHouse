@@ -1,10 +1,16 @@
-"use server";
+import { prisma } from "@/lib/prisma";
 
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-
-export async function createNews(title: string, content: string) {
-  return await prisma.news.create({
-    data: { title, content }
-  });
-}
+export const createNews = async (title: string, content: string, imageUrl: string) => {
+  try {
+    await prisma.news.create({
+      data: {
+        title,
+        content,
+        imageUrl,
+      },
+    });
+  } catch (error) {
+    console.error("Error creando noticia:", error);
+    throw error;
+  }
+};
