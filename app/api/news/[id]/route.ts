@@ -1,18 +1,21 @@
-import { NextResponse } from "next/server";
+// app/api/news/[id]/route.ts
+import { NextResponse, NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
-import type { NextRequest } from "next/server";
 
-// Esta es la forma correcta para App Router
+// Next.js espera que el segundo argumento sea `params`, no `context`
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const { id } = context.params;
+  const { id } = params;
 
   try {
-    await prisma.news.delete({ where: { id } });
+    await prisma.news.delete({
+      where: { id }
+    });
+
     return NextResponse.json({ message: "Noticia eliminada" });
   } catch (error) {
-    return NextResponse.json({ error: "Error deleting news" }, { status: 500 });
+    return NextResponse.json({ error: "Error eliminando noticia" }, { status: 500 });
   }
 }
